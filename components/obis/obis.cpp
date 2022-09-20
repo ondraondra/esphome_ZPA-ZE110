@@ -66,6 +66,7 @@ void OBISBase::read_line() {
       this->index = 0;
       break;
     }
+    read_line();
   }  // available
 }
 
