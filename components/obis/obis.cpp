@@ -62,11 +62,13 @@ void OBISBase::read_line() {
 
       ESP_LOGVV(TAG, "Received: '%s'", this->buf);
       this->handle_line(this->buf);
-
+      
       this->index = 0;
+      
+      read_line();
+      
       break;
-    }
-    read_line();
+    }    
   }  // available
 }
 
