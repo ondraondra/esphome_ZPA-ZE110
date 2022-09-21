@@ -30,6 +30,11 @@ esp32:
 wifi:
   ap:
 
+external_components:
+  - source: github://evlo/esphome_ZPA-ZE312
+    components: [obis]
+    refresh: 0s
+
 api:
 logger:
   baud_rate: 0
@@ -41,57 +46,57 @@ captive_portal:
 mdns:
   disabled: true
 
-external_components:
-  - source: github://evlo/esphome_ZPAZE312
-    components: [obis]
-    refresh: 0s
-
 uart:
   id: uart_bus
   tx_pin: GPIO21
-  rx_pin: GPIO20  
+  rx_pin: GPIO20
+  rx_buffer_size: 2048  
   baud_rate: 300
   data_bits: 7
   stop_bits: 1
   parity: EVEN
   debug: 
     direction: BOTH
-    dummy_receiver: true
+    dummy_receiver: false
     after:
       delimiter: "\n"
     sequence:
       - lambda: UARTDebug::log_string(direction, bytes);
 
 obis:
-   uart_id: uart_bus
-   force_update: 
-     interval: 30500
-     payload: "\x2F\x3F\x21\x0D\x0A"
+  uart_id: uart_bus
+  force_update:  # optional
+    interval: 10000
+    payload: "\x2F\x3F\x21\x0D\x0A"
 
-# switch:
-# - platform: uart
-#   name: "UART send 2"
-#   data: [0x2F, 0x3F, 0x21, 0x0D, 0x0A]
-#   send_every: 21s
 
 sensor:
   - platform: obis
+    name: "esphome L1"
     channel: "21.8.0"
-    name: "L1"
-    unit_of_measurement: "kWh"
+    unit_of_measurement: kWh
     accuracy_decimals: 3
-
+    device_class: energy
+    state_class: total_increasing
   - platform: obis
+    name: "esphome L2"
     channel: "41.8.0"
-    name: "L2"
-    unit_of_measurement: "kWh"
+    unit_of_measurement: kWh
     accuracy_decimals: 3
-
+    device_class: energy
+    state_class: total_increasing
   - platform: obis
+    name: "esphome L3"
     channel: "61.8.0"
-    name: "L3"
-    unit_of_measurement: "kWh"
+    unit_of_measurement: kWh
     accuracy_decimals: 3
+    device_class: energy
+    state_class: total_increasing
+
+text_sensor:
+    - platform: obis
+      channel: "0.0.0"
+      name: "Serial Number"
 ```
 
 
