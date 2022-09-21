@@ -63,11 +63,15 @@ uart:
     sequence:
       - lambda: UARTDebug::log_string(direction, bytes);
 
+interval:
+  - interval: 60sec
+    then:
+      - uart.write:
+          id: uart_bus
+          data: [0x2F, 0x3F, 0x21, 0x0D, 0x0A]
+      
 obis:
   uart_id: uart_bus
-  force_update:  # optional
-    interval: 10000
-    payload: "\x2F\x3F\x21\x0D\x0A"
 
 
 sensor:
