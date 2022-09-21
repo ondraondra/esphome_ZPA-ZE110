@@ -47,7 +47,7 @@ using namespace std;
 namespace esphome {
 namespace obis {
 
-#define OBIS_BUFSIZE 512
+#define OBIS_BUFSIZE 4096
 
 class OBISChannelBase {
   friend class OBISBase;
