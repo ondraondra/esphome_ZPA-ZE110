@@ -65,7 +65,7 @@ void OBISBase::read_line() {
       
       this->index = 0;
       
-      ESP_LOGD(TAG, "Iterating return from meter", line, value, unit);
+      ESP_LOGD(TAG, "Iterating return from meter");
       read_line();
       
       break;
