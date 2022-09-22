@@ -199,3 +199,7 @@ this is also usefull to understand what data you get from the meter, check ČEZ 
 ;1,C.3.9(@1,Attacks,,attacks,0
 #
 ````
+
+HW example with lilygo ttgo t01c3
+![image](https://user-images.githubusercontent.com/8813196/191762289-32130570-91ad-45d8-9a47-987527044a13.png)
+
